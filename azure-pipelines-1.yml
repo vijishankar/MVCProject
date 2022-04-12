@@ -9,12 +9,12 @@ parameters:
 - name: MVCProj
   displayName: MVCProject
   type: boolean
-  default: false
+  default: true
   
 - name: MVCwithDock
   displayName: MVCwithDocket
   type: boolean
-  default: false
+  default: true
 
 resources:
   repositories:
