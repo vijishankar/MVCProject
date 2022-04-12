@@ -26,13 +26,13 @@ parameters:
    
 steps:
 - ${{ if eq(parameters.MVCProj, true) }}:
+    - checkout: self
+    - script: ls $(Build.SourcesDirectory)/MVCProject
     - script: echo "Checkout the MVCProject"
-- checkout: self
-- script: ls $(Build.SourcesDirectory)/MVCProject
 
 - ${{ if eq(parameters.MVCwithDock, true) }}:
+    - checkout: MVCwithDocket
+    - script: ls $(Build.SourcesDirectory)/MVCwithDocket
     - script: echo "Checkout the MVCwithDocker"
-- checkout: MVCwithDocket
-- script: ls $(Build.SourcesDirectory)/MVCwithDocket
 
 - script: dir $(Build.SourcesDirectory)
