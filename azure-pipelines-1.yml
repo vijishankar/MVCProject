@@ -1,3 +1,15 @@
+parameters:
+- name: image
+  displayName: Pool Image
+  values:
+  - windows-latest
+  - ubuntu-latest
+  - macOS-latest
+- name: test
+  displayName: Run Tests?
+  type: boolean
+  default: false
+  
 resources:
   repositories:
   - repository: MVCwithDocket # The name used to reference this repository in the checkout step
@@ -13,19 +25,12 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+
 steps:
 - checkout: self
 - checkout: MVCwithDocket
 
 - script: dir $(Build.SourcesDirectory)
-
-- task: NuGetToolInstaller@0
-  displayName: 'Use NuGet 4.4.1'
-  inputs:
-    versionSpec: 4.4.1
-
-- task: NuGetCommand@2
-  displayName: 'NuGet restore'
-  inputs:
-    restoreSolution: '$(Parameters.solution)'
+- script: ls $(Build.SourcesDirectory)/MVCProject
+- script: ls $(Build.SourcesDirectory)/MVCwithDocket
 
