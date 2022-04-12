@@ -5,10 +5,12 @@ parameters:
   - windows-latest
   - ubuntu-latest
   - macOS-latest
+
 - name: MVCProj
   displayName: MVCProject
   type: boolean
   default: false
+  
 - name: MVCwithDock
   displayName: MVCwithDocket
   type: boolean
