@@ -1,3 +1,10 @@
+resources:
+  repositories:
+  - repository: MVCwithDocket # The name used to reference this repository in the checkout step
+    type: github
+    endpoint: Vigneshwar-Meganathan
+    name: Vigneshwar-Meganathan/MVCwithDocket
+
 parameters:
 - name: image
   displayName: Pool Image
@@ -16,15 +23,7 @@ parameters:
   displayName: MVCwithDocket
   type: boolean
   default: false
-
-resources:
-  repositories:
-  - repository: MVCwithDocket # The name used to reference this repository in the checkout step
-    type: github
-    endpoint: Vigneshwar-Meganathan
-    name: Vigneshwar-Meganathan/MVCwithDocket
-     
-
+   
 steps:
 - ${{ if eq(parameters.MVCProj, true) }}:
     - script: echo "Checkout the MVCProject"
