@@ -5,11 +5,15 @@ parameters:
   - windows-latest
   - ubuntu-latest
   - macOS-latest
-- name: test
-  displayName: Run Tests?
+- name: MVCProj
+  displayName: MVCProject
   type: boolean
   default: false
-  
+- name: MVCwithDock
+  displayName: MVCwithDocket
+  type: boolean
+  default: false
+
 resources:
   repositories:
   - repository: MVCwithDocket # The name used to reference this repository in the checkout step
@@ -22,15 +26,16 @@ resources:
 trigger:
 - main
 
-pool:
-  vmImage: 'windows-latest'
-
-
 steps:
 - checkout: self
-- checkout: MVCwithDocket
-
 - script: dir $(Build.SourcesDirectory)
 - script: ls $(Build.SourcesDirectory)/MVCProject
+- ${{ if eq(parameters.MVCProj, true) }}:
+    - script: echo "Checkout the MVCProject"
+
+- checkout: MVCwithDocket
+- script: dir $(Build.SourcesDirectory)
 - script: ls $(Build.SourcesDirectory)/MVCwithDocket
+- ${{ if eq(parameters.MVCwithDock, true) }}:
+    - script: echo "Checkout the MVCProject"
 
