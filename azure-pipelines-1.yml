@@ -19,21 +19,6 @@ steps:
 
 - script: dir $(Build.SourcesDirectory)
 - script: ls $(Build.SourcesDirectory)/MVCwithDocket
-
-- task: Docker@0
-  displayName: 'Build an image'
-  inputs:
-    azureSubscription: 'Vignesh-Connection '
-    azureContainerRegistry: '{"loginServer":"vigneshdockercontainer.azurecr.io", "id" : "/subscriptions/7a8d40b6-7f16-48d4-ad95-56fc81f464a2/resourceGroups/Vigneshwar-RG/providers/Microsoft.ContainerRegistry/registries/VigneshDockerContainer"}'
-    dockerFile: WebApplication3/Dockerfile
-
-- task: Docker@0
-  displayName: 'Push an image'
-  inputs:
-    azureSubscription: 'Vignesh-Connection '
-    azureContainerRegistry: '{"loginServer":"vigneshdockercontainer.azurecr.io", "id" : "/subscriptions/7a8d40b6-7f16-48d4-ad95-56fc81f464a2/resourceGroups/Vigneshwar-RG/providers/Microsoft.ContainerRegistry/registries/VigneshDockerContainer"}'
-    action: 'Push an image'
-
 - script: ls $(Build.SourcesDirectory)/MVCProject
 
 - task: NuGetToolInstaller@1
