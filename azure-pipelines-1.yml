@@ -28,9 +28,9 @@ steps:
 - ${{ if eq(parameters.MVCProj, true) }}:
     - script: echo "Checkout the MVCProject"
     - checkout: self
-    - script: ls $(Build.SourcesDirectory)
+    - script: ls 
 
 - ${{ if eq(parameters.MVCwithDock, true) }}:
     - script: echo "Checkout the MVCwithDocker"
     - checkout: MVCwithDocket
-    - script: ls $(Build.SourcesDirectory)
+    - script: ls 
