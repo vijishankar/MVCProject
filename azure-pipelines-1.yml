@@ -19,4 +19,60 @@ steps:
 
 - script: dir $(Build.SourcesDirectory)
 - script: ls $(Build.SourcesDirectory)/MVCwithDocket
+
+- task: Docker@0
+  displayName: 'Build an image'
+  inputs:
+    azureSubscription: 'Vignesh-Connection '
+    azureContainerRegistry: '{"loginServer":"vigneshdockercontainer.azurecr.io", "id" : "/subscriptions/7a8d40b6-7f16-48d4-ad95-56fc81f464a2/resourceGroups/Vigneshwar-RG/providers/Microsoft.ContainerRegistry/registries/VigneshDockerContainer"}'
+    dockerFile: WebApplication3/Dockerfile
+
+- task: Docker@0
+  displayName: 'Push an image'
+  inputs:
+    azureSubscription: 'Vignesh-Connection '
+    azureContainerRegistry: '{"loginServer":"vigneshdockercontainer.azurecr.io", "id" : "/subscriptions/7a8d40b6-7f16-48d4-ad95-56fc81f464a2/resourceGroups/Vigneshwar-RG/providers/Microsoft.ContainerRegistry/registries/VigneshDockerContainer"}'
+    action: 'Push an image'
+
 - script: ls $(Build.SourcesDirectory)/MVCProject
+
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    ArtifactName:  sample-site
+    PathtoPublish: $(build.artifactStagingDirectory)
+
+- task: DownloadBuildArtifacts@1
+  inputs:
+    buildType: 'specific'
+    project: 'd3917c9e-cb2c-4f26-9647-da26b8b117a5'
+    pipeline: '51'
+    buildVersionToDownload: 'latest'
+    downloadType: 'single'
+    downloadPath: '$(System.ArtifactsDirectory)'
+
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Vicky-Demo.V2 (7a8d40b6-7f16-48d4-ad95-56fc81f464a2)'
+    appType: 'webApp'
+    WebAppName: 'testdotnetappvignesh'
+    packageForLinux: '$(System.ArtifactsDirectory)/sample-site/WebApp.zip'
