@@ -17,10 +17,6 @@ steps:
 - checkout: self
 - checkout: MVCwithDocket
 
-- script: dir $(Build.SourcesDirectory)
-- script: ls $(Build.SourcesDirectory)/MVCwithDocket
-- script: ls $(Build.SourcesDirectory)/MVCProject
-
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
