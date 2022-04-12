@@ -22,22 +22,19 @@ resources:
     type: github
     endpoint: Vigneshwar-Meganathan
     name: Vigneshwar-Meganathan/MVCwithDocket
-    trigger: none
- 
-trigger:
-- none
+     
 
 steps:
 - ${{ if eq(parameters.MVCProj, true) }}:
     - script: echo "Checkout the MVCProject"
-- script: ls $(Build.SourcesDirectory)/MVCProject
 - checkout: self
+- script: ls $(Build.SourcesDirectory)/MVCProject
 - script: dir $(Build.SourcesDirectory)
 
 - ${{ if eq(parameters.MVCwithDock, true) }}:
     - script: echo "Checkout the MVCwithDocker"
-- script: ls $(Build.SourcesDirectory)/MVCwithDocket
 - checkout: MVCwithDocket
+- script: ls $(Build.SourcesDirectory)/MVCwithDocket
 - script: dir $(Build.SourcesDirectory)
 
 
