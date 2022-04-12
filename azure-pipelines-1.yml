@@ -27,8 +27,8 @@ parameters:
 steps:
 - ${{ if eq(parameters.MVCProj, true) }}:
     - checkout: self
-    - script: ls $(Build.SourcesDirectory)/MVCProject
     - script: echo "Checkout the MVCProject"
+    - script: ls $(Build.SourcesDirectory)/MVCProject
 
 - ${{ if eq(parameters.MVCwithDock, true) }}:
     - checkout: MVCwithDocket
