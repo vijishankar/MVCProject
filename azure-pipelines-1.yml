@@ -26,15 +26,15 @@ trigger:
 - none
 
 steps:
-- script: ls $(Build.SourcesDirectory)/MVCProject
 - ${{ if eq(parameters.MVCProj, true) }}:
     - script: echo "Checkout the MVCProject"
+- script: ls $(Build.SourcesDirectory)/MVCProject
 - checkout: self
 - script: dir $(Build.SourcesDirectory)
 
-- script: ls $(Build.SourcesDirectory)/MVCwithDocket
 - ${{ if eq(parameters.MVCwithDock, true) }}:
     - script: echo "Checkout the MVCwithDocker"
+- script: ls $(Build.SourcesDirectory)/MVCwithDocket
 - checkout: MVCwithDocket
 - script: dir $(Build.SourcesDirectory)
 
