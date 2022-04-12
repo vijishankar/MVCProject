@@ -5,16 +5,17 @@ parameters:
   - windows-latest
   - ubuntu-latest
   - macOS-latest
+  default: ubuntu-latest
 
 - name: MVCProj
   displayName: MVCProject
   type: boolean
-  default: true
+  default: false
   
 - name: MVCwithDock
   displayName: MVCwithDocket
   type: boolean
-  default: true
+  default: false
 
 resources:
   repositories:
