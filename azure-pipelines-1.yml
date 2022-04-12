@@ -1,0 +1,22 @@
+resources:
+  repositories:
+  - repository: MVCwithDocket # The name used to reference this repository in the checkout step
+    type: github
+    endpoint: Vigneshwar-Meganathan
+    name: Vigneshwar-Meganathan/MVCwithDocket
+    trigger:
+    - master
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- checkout: self
+- checkout: MVCwithDocket
+
+- script: dir $(Build.SourcesDirectory)
+- script: ls $(Build.SourcesDirectory)/MVCwithDocket
+- script: ls $(Build.SourcesDirectory)/MVCProject
