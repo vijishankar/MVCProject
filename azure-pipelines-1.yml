@@ -8,10 +8,6 @@ resources:
 parameters:
 - name: image
   displayName: Pool Image
-  values:
-  - windows-latest
-  - ubuntu-latest
-  - macOS-latest
   default: ubuntu-latest
 
 - name: MVCProj
