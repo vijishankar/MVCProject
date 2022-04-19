@@ -1,0 +1,5 @@
+#variables.yml
+
+variables:
+  ServiceConnections: ''
+  AppService1: ''
